@@ -25,6 +25,7 @@ hs_err_pid*
 out/
 .cache/
 test-data/
+config/
 target/
 .idea/
 

@@ -1,5 +1,6 @@
 package org.copypaste.data;
 
+import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
 import java.util.Objects;
@@ -88,15 +89,20 @@ public class FileSummary {
             return this;
         }
 
-        public Builder checkSum(String checkSum) {
-            if (StringUtils.isEmpty(checkSum)) {
-                throw new IllegalArgumentException("Check sum should not be empty");
-            }
+        public Builder checkSum(@Nullable String checkSum) {
             this.checkSum = checkSum;
             return this;
         }
 
-        public FileSummary fileSummary() {
+        public Builder fileSummary(FileSummary fileSummary) {
+            creationTime(fileSummary.creationTime);
+            name(fileSummary.name);
+            size(fileSummary.size);
+            checkSum(fileSummary.checkSum);
+            return this;
+        }
+
+        public FileSummary build() {
             return new FileSummary(creationTime, name, size, checkSum);
         }
     }

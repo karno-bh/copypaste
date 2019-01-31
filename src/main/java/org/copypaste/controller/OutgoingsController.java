@@ -22,7 +22,7 @@ public class OutgoingsController {
     @GetMapping("/files")
     public List<FileSummary> getAllFiles() {
         log.info("All files requested");
-        List<FileSummary> fileSummaries = filesMetadataService.directorySummaries(Global.OUTGOING_DIRECTORY);
+        List<FileSummary> fileSummaries = filesMetadataService.directorySummaries(Global.OUTGOING_DIRECTORY, true);
         return fileSummaries;
     }
 

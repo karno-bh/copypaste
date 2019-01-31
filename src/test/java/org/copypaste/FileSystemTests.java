@@ -29,7 +29,7 @@ public class FileSystemTests {
         try {
             createDummyFiles(dummyFiles);
             FilesMetadataService filesMetadataService = new FilesMetadataService();
-            List<FileSummary> summaries = filesMetadataService.directorySummaries(Commons.TEST_TEMP_DIR);
+            List<FileSummary> summaries = filesMetadataService.directorySummaries(Commons.TEST_TEMP_DIR, true);
 //            Assert.assertEquals(10, summaries.size());
             List<String> fsSummaries = new ArrayList<>();
             for (FileSummary fileSummary : summaries) {

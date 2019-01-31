@@ -1,3 +1,17 @@
+2019-01-31
+    CONTINUE:
+        1. Writing OutgoingController
+    Done:
+        1. Added a daemon hasher for md5 files checksums
+    TODO:
+        1. Idea of the application is to divide the file to chunks. Each chunk will be requested separately. It will be
+           a headache of the client to request the right chunk. [In general, the idea is to use a keep-alive of http.]
+        2. Write Chunkenizer service
+        3. Write a job that will calculate md5 check sums every 5 minutes since it will be a heavy operation
+        4. check how to configure SLF4J
+        5. Write javadocs
+        6. More test...???
+
 2019-01-30
     CONTINUE:
         1. Writing OutgoingController
