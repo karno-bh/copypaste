@@ -20,14 +20,22 @@ public class CheckSumCacheService implements Runnable {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
     private Map<String, String> configData;
 
-    @Autowired
-    private FilesMetadataService filesMetadataService;
+    private FileMetadataNoHashService fileMetadataNoHashService;
 
     // fileName -> Hex MD5 Cache
     private final Map<String, String> cache = new ConcurrentHashMap<>();
+
+    @Autowired
+    public void setConfigData(Map<String, String> configData) {
+        this.configData = configData;
+    }
+
+    @Autowired
+    public void setFileMetadataNoHashService(FileMetadataNoHashService fileMetadataNoHashService) {
+        this.fileMetadataNoHashService = fileMetadataNoHashService;
+    }
 
     @Override
     public void run() {
@@ -36,7 +44,7 @@ public class CheckSumCacheService implements Runnable {
         // this is a daemon => no need to stop explicitly
         while (true) {
             try {
-                List<FileSummary> fileSummaries = filesMetadataService.directorySummaries(Global.OUTGOING_DIRECTORY, false);
+                List<FileSummary> fileSummaries = fileMetadataNoHashService.directorySummaries(Global.OUTGOING_DIRECTORY);
                 fileSummaries
                         .stream()
                         .map(FileSummary::getName)

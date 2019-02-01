@@ -5,6 +5,7 @@ import org.copypaste.data.FileSummary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -19,23 +20,20 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
-public class FilesMetadataService {
+public class FileMetadataNoHashService {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    private CheckSumCacheService checkSumCacheService;
-
     private final long DAY_IN_MS = 1000 * 60 * 24;
 
-    public List<FileSummary> directorySummaries(String directory, boolean withFileHash) {
+    public List<FileSummary> directorySummaries(String directory) {
         Path dir = Paths.get(directory);
 
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, this::filterValidCandidate)) {
 
             return StreamSupport
                     .stream(stream.spliterator(), false)
-                    .map(withFileHash ? this::pathToFileSummaryWithHash : this::pathToFileSummaryWithNoHash)
+                    .map(this::pathToFileSummary)
                     .sorted(this::compareFileSummaries)
                     .collect(Collectors.toList());
         } catch (IOException ioe) {
@@ -53,15 +51,7 @@ public class FilesMetadataService {
         return fileTime.toMillis() > (now - DAY_IN_MS * 180);
     }
 
-    private FileSummary pathToFileSummaryWithHash(Path path) {
-        return pathToFileSummary(path, true);
-    }
-
-    private FileSummary pathToFileSummaryWithNoHash(Path path) {
-        return pathToFileSummary(path, false);
-    }
-
-    private FileSummary pathToFileSummary(Path path, boolean withFileHash) {
+    private FileSummary pathToFileSummary(Path path) {
         try {
             BasicFileAttributes attr = Files.readAttributes(path, BasicFileAttributes.class);
             FileTime fileTime = attr.creationTime();
@@ -69,13 +59,9 @@ public class FilesMetadataService {
             String name = path.getFileName().toString();
             long size = attr.size();
 
-            // in hope it is really fast... should be in cache!
-            String hash = withFileHash ?  checkSumCacheService.getMD5Hash(name) : null;
-
             return FileSummary.as()
                     .creationTime(creationTime)
                     .name(name)
-                    .checkSum(hash)
                     .size(size)
                     .build();
         } catch (IOException ioe) {

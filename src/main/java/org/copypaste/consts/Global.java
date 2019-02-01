@@ -10,6 +10,8 @@ public interface Global {
 
     String VALID_FILE_EXTENSION = ".log";
 
-    String WAIT_TILL_NEXT_REHASH_MINUTES_KEY = "wait_till_next_rehash";
+    String WAIT_TILL_NEXT_REHASH_MINUTES_KEY = "wait_till_next_rehash_ms";
+
+    String CHUNK_SIZE_KILOBYTES_KEY = "chunk_size_kb";
 
 }
