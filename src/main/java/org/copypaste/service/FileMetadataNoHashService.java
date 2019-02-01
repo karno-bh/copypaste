@@ -42,13 +42,16 @@ public class FileMetadataNoHashService {
     }
 
     private boolean filterValidCandidate(Path path) throws IOException {
+        return path.getFileName().toString().toLowerCase().endsWith(Global.VALID_FILE_EXTENSION);
+        /*
+        // more real example to not allow all files older than some date
         long now = System.currentTimeMillis();
         if (!path.getFileName().toString().toLowerCase().endsWith(Global.VALID_FILE_EXTENSION)) {
             return false;
         }
         BasicFileAttributes attr = Files.readAttributes(path, BasicFileAttributes.class);
         FileTime fileTime = attr.creationTime();
-        return fileTime.toMillis() > (now - DAY_IN_MS * 180);
+        return fileTime.toMillis() > (now - DAY_IN_MS * 180);*/
     }
 
     private FileSummary pathToFileSummary(Path path) {

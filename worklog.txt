@@ -2,6 +2,17 @@
     CONTINUE:
         1. Bugs?
     Done:
+        1. Removed last 180 days files. All files retrieved
+    TODO:
+        1. check how to configure SLF4J
+        2. Write javadocs
+        3. More test...???
+        4. Write readme!!!
+
+2019-02-01
+    CONTINUE:
+        1. Bugs?
+    Done:
         1. Moved configuration bean to be in application itself. [now :)] I understood the reason why I don't like
            Spring based on annotations... god knows how the container is built and what the order of beans
            instantiations.
