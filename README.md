@@ -2,12 +2,12 @@
 ## Design
 ### Chosen Protocol & High Level Overview
 The design of the project is to have a web service layer which will be responsible for downloading the needed file(s)
-by chunks within HTTP server. HTTP protocol chosen as a wide accepted one.Although there exists a range download for
+by chunks within HTTP server. HTTP protocol chosen as a wide accepted one. Although there exists a range download for
 files in http however the author thinks that:
 1. Range download design is more vulnerable for DDoS attacks since the client has control over the chunk. In current
    design the server defines the chunk size, so it close to impossible to block the server thread pool.
-2. The author thinks the web service design (REST based) could be implemented by any language modern much more quickly
-   today because of wide acceptance of the HTTP protocol high level tooling. It is much more complicated for people to
+2. The author thinks the web service design (REST based) could be implemented by any modern language much more quickly
+   today because of wide acceptance of the HTTP protocol's high level tooling. It is much more complicated for people to
    think in protocol details (HTTP headers for range download) than in data transfer objects.
 3. The control for the server side over the implementation within range downloads will be more complicated to code on
    the server side. It is lower details of the HTTP server.
@@ -32,7 +32,7 @@ type.
     needed by client to verify the content integrity of the file. (Thus, if the integrity fails because, for instance,
     the file was modified on server side during the transmitting the client should request the file checksum again.
     However, it will not happen on demand by server if the server running. Server will always reply with the firstly
-    calculated checksum. This is by design too since once files are in outgoing directory they should not touched.
+    calculated checksum. This is by design too since once files are in outgoing directory they should not be touched.
     If such event happens this should detected. The server should be restarted explicitly to recalculate checksums as
     per current design)
     + The /chunk endpoint requires the two additional parameters as chunk number and file name. The server will reply
