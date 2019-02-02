@@ -1,5 +1,13 @@
 2019-02-02
     CONTINUE:
+        1. Bugs?
+    Done:
+        1. Readme
+    TODO:
+        1. 
+
+2019-02-02
+    CONTINUE:
         1. Readme
     Done:
         1. Java docs updated
