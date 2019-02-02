@@ -67,8 +67,8 @@ public class Application {
 
     private Map<String, String> defaultConfiguration() {
         Map<String, String> config = new HashMap<>();
-        config.put(Global.WAIT_TILL_NEXT_REHASH_MINUTES_KEY, "5");
-        config.put(Global.CHUNK_SIZE_KILOBYTES_KEY, "64");
+        config.put(Global.WAIT_TILL_NEXT_REHASH_MINUTES_KEY, Global.WAIT_TILL_NEXT_REHASH_MINUTES_DEFAULT);
+        config.put(Global.CHUNK_SIZE_KILOBYTES_KEY, Global.CHUNK_SIZE_DEFAULT);
         return config;
     }
 

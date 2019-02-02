@@ -18,6 +18,10 @@ public interface Global {
 
     String WAIT_TILL_NEXT_REHASH_MINUTES_KEY = "wait_till_next_rehash_ms";
 
+    String WAIT_TILL_NEXT_REHASH_MINUTES_DEFAULT = "5";
+
     String CHUNK_SIZE_KILOBYTES_KEY = "chunk_size_kb";
+
+    String CHUNK_SIZE_DEFAULT = "512";
 
 }
