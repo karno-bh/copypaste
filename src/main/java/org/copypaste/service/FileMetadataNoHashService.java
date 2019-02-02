@@ -19,6 +19,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+/**
+ *
+ * A service that retrieves suitable files for transfer. Used by either file hashing cache service or by server
+ * indirectly
+ *
+ * @author Sergey
+ */
 @Service
 public class FileMetadataNoHashService {
 
@@ -45,6 +52,7 @@ public class FileMetadataNoHashService {
         return path.getFileName().toString().toLowerCase().endsWith(Global.VALID_FILE_EXTENSION);
         /*
         // more real example to not allow all files older than some date
+
         long now = System.currentTimeMillis();
         if (!path.getFileName().toString().toLowerCase().endsWith(Global.VALID_FILE_EXTENSION)) {
             return false;

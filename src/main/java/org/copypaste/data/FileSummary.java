@@ -5,6 +5,13 @@ import org.springframework.util.StringUtils;
 
 import java.util.Objects;
 
+/**
+ * Minimal representation for the client to make her understanding what file she can download. In general she should
+ * take one with tha nearest time modification. However, in order to the system to support re-downloading the file she
+ * can also request one from the list. This is because downloading can fail and since the files are big it may be
+ * requested to download the file again, but the newest one will be already updated.
+ * @author Sergey
+ */
 public class FileSummary {
 
     private final long creationTime;

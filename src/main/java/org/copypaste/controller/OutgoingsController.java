@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * The main server end point set. Due to simplicity of application, all endpoints are concentrated in one file.
+ *
+ * @author Sergey
+ */
 @RestController
 public class OutgoingsController {
 

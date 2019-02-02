@@ -15,6 +15,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * The daemon thread {@link Thread#setDaemon(boolean)} which caches MD5 check sums of available by system files in
+ * upload directory. The design of the naked thread chosen because of its simplicity [daemon thread guaranties that it
+ * will shutdown within process shutdown]. We want to have something that just works. Making it within more abstraction
+ * layers makes it more complicated for support.
+ *
+ * @author Sergey
+ */
 @Service
 public class CheckSumCacheService implements Runnable {
 
@@ -24,7 +32,10 @@ public class CheckSumCacheService implements Runnable {
 
     private FileMetadataNoHashService fileMetadataNoHashService;
 
-    // fileName -> Hex MD5 Cache
+    /**
+     * fileName -> Hex MD5 Cache. Map is concurrent because it accessed from different thread. The synchronization is
+     * performed by {@link ConcurrentHashMap#computeIfAbsent(java.lang.Object, java.util.function.Function)}.
+     */
     private final Map<String, String> cache = new ConcurrentHashMap<>();
 
     @Autowired
@@ -66,6 +77,12 @@ public class CheckSumCacheService implements Runnable {
         return (long)minutes * 60L * 1000L;
     }
 
+    /**
+     * Look at the {@link ConcurrentHashMap#computeIfAbsent(java.lang.Object, java.util.function.Function)} explanation
+     * why it does not need additional synchronizations.
+     * @param fileName file name in outgoing directory
+     * @return computed MD5 hash of the file
+     */
     public String getMD5Hash(String fileName) {
         return cache.computeIfAbsent(fileName, this::onAbsentKey);
     }

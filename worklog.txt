@@ -1,3 +1,14 @@
+2019-02-02
+    CONTINUE:
+        1. Readme
+    Done:
+        1. Java docs updated
+        2. SLF4J will not be configured. If one wants to output to file she can redirect standard output to file.
+           No need to have overcomplicated design.
+        3. The number of tests is enough. No need to write test as it is the target. This is not the target.
+    TODO:
+        1. Write readme!!!
+
 2019-02-01
     CONTINUE:
         1. Bugs?

@@ -18,6 +18,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+/**
+ * Main entry point for the application. The application is Srping Boot based application
+ */
 @SpringBootApplication
 public class Application {
 
@@ -32,6 +35,12 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
+    /**
+     * Returns a map with configs. In case config directory and config property file exists within current
+     * directory it tries load the config file. Otherwise it creates a config property file and save it under config
+     * directory. In case it loads the file it is also validates fields if it fails default values will be used
+     * @return - map with all relevant configs
+     */
     @Bean
     public Map<String, String> configData() {
 

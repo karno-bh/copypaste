@@ -17,6 +17,14 @@ import java.text.MessageFormat;
 import java.util.Base64;
 import java.util.Map;
 
+/**
+ *
+ * The main logic of reading the file chunk. The granularity of chunk is chosen either by user or system default.
+ * The design is such in order for client not having a control over the chunk sizes as it is in range downloads.
+ * Despite of its simplicity range downloads are more fragile from the point of view DDoS attacks.
+ *
+ * @author Sergey
+ */
 @Service
 public class FileChunkReader {
 
@@ -28,12 +36,11 @@ public class FileChunkReader {
     }
 
     /**
-     * Read the file chunk based on some chunk size. It seems like the starts said me what the optimal
-     * chunk file should be. It could be related to TCP window size or even file block size, but stars know better.
-     * Or maybe even I just love this number...
+     * Read the file chunk based on some chunk size. Chunk size granularity is injected by config map.
+     * Without entering to the deeper details most modern file system has bounded by O(log(n)) in fseek operation.
      * @param path - file to process
      * @param chunkNum
-     * @return
+     * @return requested file chunk
      */
     public FileChunk readChunk(Path path, long chunkNum) {
         try (RandomAccessFile raf = new RandomAccessFile(path.toFile(), "r")){

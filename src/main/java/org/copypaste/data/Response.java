@@ -1,5 +1,14 @@
 package org.copypaste.data;
 
+/**
+ * Common wrapper for all responses. Payload could be any type [but should have getters].
+ * There are two factory methods for builders: {@link Response#good(java.lang.Object)} and {@link Response#bad()}.
+ * The first one should preserve the compile type safety but the second one not, since on exception there is no real
+ * value available.
+ * @param <T> the type of the payload. In general should be specified as passed value with needed type.
+ *
+ * @author Sergey
+ */
 public class Response<T> {
 
     private final T payload;
@@ -26,6 +35,13 @@ public class Response<T> {
         this.exception = exception;
     }
 
+    /**
+     * Builder for the good response. It is up to client to add exception if she wants.
+     *
+     * @param val - value of the good response
+     * @param <K> - value type
+     * @return builder for good response
+     */
     public static <K> Builder<K> good(K val) {
         Builder<K> builder = new Builder<>();
         builder.success(true);
@@ -33,6 +49,11 @@ public class Response<T> {
         return builder;
     }
 
+    /**
+     * Builder for the bad response. It is up to client to add exception if she wants.
+     *
+     * @return builder for non success response
+     */
     public static Builder bad() {
         Builder builder = new Builder();
         builder.success(false);

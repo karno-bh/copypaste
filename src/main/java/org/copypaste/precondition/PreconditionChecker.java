@@ -20,8 +20,14 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.function.Predicate;
 
+/**
+ * The logic that runs before the inner server starts up. In general, it checks whether the upload directory exists
+ * and creates if not. <br><br>
+ *
+ * As well it starts the background thread which will calculate the check sums for files.
+ * @author Sergey
+ */
 @Service
-@Configuration
 public class PreconditionChecker implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(PreconditionChecker.class);

@@ -13,7 +13,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-
+/**
+ * A service that retrieves files available files for with MD5 hash. Used by server end points
+ * @author Sergey
+ */
 @Service
 public class FileMetadataHashService {
 

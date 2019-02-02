@@ -1,5 +1,11 @@
 package org.copypaste.consts;
 
+
+/**
+ * Globals constants per application.
+ *
+ * @author Sergey
+ */
 public interface Global {
 
     String OUTGOING_DIRECTORY = "out";
